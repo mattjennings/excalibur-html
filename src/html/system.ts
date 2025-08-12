@@ -1,5 +1,5 @@
 import { ComponentCtor, Entity, Query, SystemType, World } from 'excalibur'
-import { BaseHTMLComponent, BaseHTMLSystem } from './base-html-system'
+import { BaseHTMLComponent, BaseHTMLSystem } from '../base-html-system'
 
 export class HTMLSystem extends BaseHTMLSystem<HTMLComponent> {
   systemType = SystemType.Draw

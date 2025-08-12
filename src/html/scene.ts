@@ -1,5 +1,5 @@
 import * as ex from 'excalibur'
-import { HTMLComponent, HTMLSystem, RenderFn } from '../systems/html-system'
+import { HTMLComponent, HTMLSystem, RenderFn } from './system'
 
 export class HTMLScene extends ex.Scene {
   constructor() {

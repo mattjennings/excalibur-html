@@ -1,6 +1,6 @@
 import { ReactNode, useSyncExternalStore } from 'react'
 import * as ReactDOM from 'react-dom/client'
-import { BaseHTMLSystem, BaseHTMLComponent } from './base-html-system'
+import { BaseHTMLSystem, BaseHTMLComponent } from '../base-html-system'
 import { World, Query, ComponentCtor, Entity } from 'excalibur'
 
 export class ReactSystem extends BaseHTMLSystem<ReactComponent> {

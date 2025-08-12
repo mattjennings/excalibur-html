@@ -1,5 +1,5 @@
 import * as ex from 'excalibur'
-import { ReactComponent, ReactSystem } from '../systems/react-system'
+import { ReactComponent, ReactSystem } from './system'
 import { useEffect, useState } from 'react'
 
 export class ReactScene extends ex.Scene {

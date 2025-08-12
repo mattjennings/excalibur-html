@@ -1,7 +1,7 @@
 import * as ex from 'excalibur'
 import './style.css'
-import { ReactScene } from './scenes/react'
-import { HTMLScene } from './scenes/html'
+import { ReactScene } from './react/scene'
+import { HTMLScene } from './html/scene'
 
 const game = new ex.Engine({
   width: 600,
@@ -17,5 +17,5 @@ const game = new ex.Engine({
   },
 })
 
-game.goToScene('react')
+game.goToScene('html')
 game.start()
