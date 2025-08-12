@@ -12,14 +12,19 @@ export class ReactScene extends ex.Scene {
     const e = new ReactEntity('i will be destroyed and replaced in 1s')
     this.add(e)
     setTimeout(() => {
-      this.add(new ReactEntity('click me'))
       e.kill()
+      this.add(new ReactEntity('click me'))
     }, 1000)
   }
 }
 
 class ReactEntity extends ex.Actor {
-  ui = new ReactComponent(() => {
+  constructor(public text: string) {
+    super()
+    this.addComponent(new ReactComponent(this.ui.bind(this)))
+  }
+
+  ui() {
     const [text, setText] = useState(this.text)
     const [timer, setTimer] = useState<number | undefined>()
 
@@ -49,10 +54,5 @@ class ReactEntity extends ex.Actor {
         {text}
       </button>
     )
-  })
-
-  constructor(public text: string) {
-    super()
-    this.addComponent(this.ui)
   }
 }

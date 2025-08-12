@@ -1,5 +1,5 @@
 import * as ex from 'excalibur'
-import { HTMLComponent, HTMLSystem } from '../systems/html-system'
+import { HTMLComponent, HTMLSystem, RenderFn } from '../systems/html-system'
 
 export class HTMLScene extends ex.Scene {
   constructor() {
@@ -13,8 +13,12 @@ export class HTMLScene extends ex.Scene {
 }
 
 export class HTMLEntity extends ex.Actor {
-  ui = new HTMLComponent((el) => {
-    console.log('render')
+  constructor() {
+    super()
+    this.addComponent(new HTMLComponent(this.ui))
+  }
+
+  ui: RenderFn = (el) => {
     el.innerHTML =
       '<button style="pointer-events: auto; cursor: pointer;">click me</button>'
     const btn = el.querySelector('button')
@@ -35,10 +39,5 @@ export class HTMLEntity extends ex.Actor {
       // cleanup any side effects here
       clearTimeout(timer)
     }
-  })
-
-  constructor() {
-    super()
-    this.addComponent(this.ui)
   }
 }
