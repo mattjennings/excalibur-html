@@ -68,7 +68,7 @@ export abstract class BaseHTMLSystem<
       this.entitiesToRender.add(entity)
     })
     this.query.entityRemoved$.subscribe((entity) => {
-      this.entitiesToRender.add(entity)
+      this.entitiesToCleanup.add(entity)
     })
   }
 

@@ -1,5 +1,5 @@
 import * as ex from 'excalibur'
-import { ReactComponent, ReactSystem } from '..//systems/react-system'
+import { ReactComponent, ReactSystem } from '../systems/react-system'
 import { useEffect, useState } from 'react'
 
 export class ReactScene extends ex.Scene {
@@ -9,13 +9,18 @@ export class ReactScene extends ex.Scene {
   }
 
   onInitialize() {
-    this.add(new ReactEntity())
+    const e = new ReactEntity('i will be destroyed and replaced in 1s')
+    this.add(e)
+    setTimeout(() => {
+      this.add(new ReactEntity('click me'))
+      e.kill()
+    }, 1000)
   }
 }
 
 class ReactEntity extends ex.Actor {
   ui = new ReactComponent(() => {
-    const [text, setText] = useState('click me')
+    const [text, setText] = useState(this.text)
     const [timer, setTimer] = useState<number | undefined>()
 
     useEffect(() => {
@@ -46,7 +51,7 @@ class ReactEntity extends ex.Actor {
     )
   })
 
-  constructor() {
+  constructor(public text: string) {
     super()
     this.addComponent(this.ui)
   }

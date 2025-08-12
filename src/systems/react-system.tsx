@@ -70,17 +70,21 @@ export class ReactComponent extends BaseHTMLComponent {
  * wrapper around Map to implement methods needed for useSyncExternalStore
  */
 class MapStore<Key, Value> extends Map<Key, Value> {
-  private listeners: Array<(key: Key, value: Value | undefined) => void> = []
+  private listeners: Array<(...args: any[]) => void> = []
+
+  snapshot: Array<[Key, Value]> = Array.from(this.entries())
 
   set(key: Key, value: Value): this {
     const result = super.set(key, value)
-    this.listeners.forEach((listener) => listener(key, value))
+    this.snapshot = Array.from(this.entries())
+    this.listeners.forEach((listener) => listener())
     return result
   }
 
   delete(key: Key): boolean {
     const result = super.delete(key)
-    this.listeners.forEach((listener) => listener(key, undefined))
+    this.snapshot = Array.from(this.entries())
+    this.listeners.forEach((listener) => listener())
     return result
   }
 
@@ -92,6 +96,6 @@ class MapStore<Key, Value> extends Map<Key, Value> {
   }
 
   getSnapshot = () => {
-    return this
+    return this.snapshot
   }
 }
